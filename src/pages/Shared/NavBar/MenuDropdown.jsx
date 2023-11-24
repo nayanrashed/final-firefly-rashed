@@ -1,10 +1,16 @@
 import avatar from "../../../assets/avatar.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  //   const { user } = useAuth()
+    const { user,logOut } = useAuth();
+    const handleLogout =()=>{
+      logOut()
+      .then(()=>{})
+      .catch(error=>console.log(error))
+    }
   return (
     <div className="relative">
       {/* Dropdown btn */}
@@ -29,8 +35,7 @@ const MenuDropdown = () => {
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
             <p className="px-4 py-3 text-center hover:bg-neutral-100 transition font-semibold">
-              {" "}
-              User Name
+             {user?.displayName? <p>{user?.displayName}</p>:<p>{user?.email}</p>}
             </p>
 
             <Link
@@ -39,9 +44,14 @@ const MenuDropdown = () => {
             >
               Dashboard
             </Link>
-            <button className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">
+            {
+              user?<><button onClick={handleLogout} className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">
               Logout
-            </button>
+            </button></>:<><Link to='/login'><button className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">
+              Login
+            </button></Link></>
+            }
+            
           </div>
         </div>
       )}

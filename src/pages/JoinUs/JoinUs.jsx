@@ -2,8 +2,11 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const JoinUs = () => {
+    const {createUser}= useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -12,6 +15,11 @@ const JoinUs = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    createUser(data.email,data.password)
+    .then(result=>{
+        const loggedUser = result.user;
+        console.log(loggedUser); 
+    })
   };
   return (
     <div>
@@ -21,12 +29,7 @@ const JoinUs = () => {
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Sign up now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
+            <h1 className="text-5xl font-bold">Join with US now!</h1>
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
