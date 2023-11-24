@@ -14,6 +14,7 @@ import AdminProfile from "../pages/DashBoard/AdminProfile/AdminProfile";
 import ManageUsers from "../pages/DashBoard/ManageUsers/ManageUsers";
 import ReportedActivities from "../pages/DashBoard/ReportedActivities/ReportedActivities";
 import MakeAnnouncements from "../pages/DashBoard/MakeAnnouncements/MakeAnnouncements";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -62,23 +63,23 @@ export const router = createBrowserRouter([
       // Admin Routes
       {
         path: "adminHome",
-        element: <AdminHome></AdminHome>,
+        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
       },
       {
         path: "adminProfile",
-        element: <AdminProfile></AdminProfile>,
+        element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>,
       },
       {
         path: "manageUsers",
-        element: <ManageUsers></ManageUsers>,
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
       },
       {
         path: "reportedActivities",
-        element: <ReportedActivities></ReportedActivities>,
+        element: <AdminRoute><ReportedActivities></ReportedActivities></AdminRoute>,
       },
       {
         path: "makeAnnouncements",
-        element: <MakeAnnouncements></MakeAnnouncements>,
+        element: <AdminRoute><MakeAnnouncements></MakeAnnouncements></AdminRoute>,
       },
     ],
   },
