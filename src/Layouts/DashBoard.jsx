@@ -6,8 +6,9 @@ import { FaHome } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 
 const DashBoard = () => {
-    const { user, logOut } = useAuth();
-    console.log(user);
+  const { logOut } = useAuth();
+   
+  const isAdmin = true;
   const handleLogout = () => {
     logOut()
       .then(() => {})
@@ -16,45 +17,86 @@ const DashBoard = () => {
   return (
     <div className="flex">
       {/* dashboard side bar */}
-      <div className="w-64 min-h-screen pt-6 bg-amber-400">
+      <div className="w-64 min-h-screen pt-4 bg-amber-400">
         <ul className="menu">
-          <li>
-            <NavLink to="/dashboard/myProfile">
-              <FaPersonCircleCheck></FaPersonCircleCheck>
-              My Profile{" "}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/addPost">
-              <FcComments />
-              Add Post
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/myPosts">
-              <LiaComments />
-              My Posts
-            </NavLink>
-          </li>
+          {isAdmin ? (
+            <>
+            <li>
+                <NavLink to="/dashboard/adminHome">
+                  <FaPersonCircleCheck></FaPersonCircleCheck>
+                  Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/adminProfile">
+                  <FaPersonCircleCheck></FaPersonCircleCheck>
+                  Admin Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/manageUsers">
+                  <FaPersonCircleCheck></FaPersonCircleCheck>
+                  Manage Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/reportedActivities">
+                  <FaPersonCircleCheck></FaPersonCircleCheck>
+                  Reported Activities
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/makeAnnouncements">
+                  <FaPersonCircleCheck></FaPersonCircleCheck>
+                  Make Announcements
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/dashboard/myProfile">
+                  <FaPersonCircleCheck></FaPersonCircleCheck>
+                  My Profile{" "}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/addPost">
+                  <FcComments />
+                  Add Post
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/myPosts">
+                  <LiaComments />
+                  My Posts
+                </NavLink>
+              </li>
+            </>
+          )}
           <div className="divider"></div>
+          {/* common links */}
           <li>
-            <NavLink className="px-4 py-3 hover:bg-neutral-100 transition font-semibold" to="/">
+            <NavLink
+              className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+              to="/"
+            >
               <FaHome></FaHome>
               Home
             </NavLink>
           </li>
           <li>
-          <button
-                  onClick={handleLogout}
-                  className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
-                >
-                  Logout
-                </button>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-3 hover:bg-neutral-100 transition font-semibold"
+            >
+              Logout
+            </button>
           </li>
         </ul>
       </div>
       {/* dashboard content */}
-      <div className="flex-1 pt-6">
+      <div className="flex-1 p-4">
         <Outlet></Outlet>
       </div>
     </div>

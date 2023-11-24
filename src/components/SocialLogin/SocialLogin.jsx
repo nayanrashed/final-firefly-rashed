@@ -10,6 +10,17 @@ const SocialLogin = () => {
   const handleGoogleSignIn = () => {
     googleSignIn().then((result) => {
       console.log(result.user);
+      const userInfo={
+        name: result.user?.displayName,
+        email:result.user?.email,        
+        badge: 'bronze',
+        photo: result.user?.photoURL,
+      }
+      axiosPublic.post('/users',userInfo)
+      .then(res=>{
+        console.log(res.data);
+      })
+      navigate('/')
     });
   };
   return (

@@ -20,7 +20,15 @@ const MenuDropdown = () => {
       >
         <div className="md:block">
           {/* Avatar */}
-          <img
+          {
+            user?<img
+            className="rounded-full"
+            referrerPolicy="no-referrer"
+            src={user?.photoURL}
+            alt="profile"
+            height="30"
+            width="30"
+          /> :<img
             className="rounded-full"
             referrerPolicy="no-referrer"
             src={avatar}
@@ -28,6 +36,8 @@ const MenuDropdown = () => {
             height="30"
             width="30"
           />
+          }
+          
         </div>
       </div>
 
