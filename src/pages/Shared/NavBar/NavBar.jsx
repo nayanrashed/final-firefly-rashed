@@ -1,6 +1,7 @@
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import MenuDropdown from "./MenuDropdown";
+import { FaBell } from "react-icons/fa";
 
 const NavBar = () => {
   const navOptions = (
@@ -10,6 +11,12 @@ const NavBar = () => {
       </li>
       <li>
         <Link to="/membership">Membership</Link>
+      </li>
+      <li>
+        <Link to="/">
+          <FaBell></FaBell>
+          <div className="badge badge-secondary">+0</div>
+        </Link>
       </li>
       <li>
         <Link to="/login">Join Us</Link>
@@ -23,22 +30,14 @@ const NavBar = () => {
           {/* Logo */}
           <Link to="/">
             <div className="flex">
-            <img
-              className=""
-              src={logo}
-              alt="logo"
-              width="50"
-              height="50"
-            />
-            <p className="text-5xl font-semibold pl-4 hidden md:block">firefly</p>
+              <img className="" src={logo} alt="logo" width="50" height="50" />
+              <p className="text-5xl font-semibold pl-4 hidden md:block">
+                firefly
+              </p>
             </div>
           </Link>
-          
-          <ul className="menu menu-horizontal px-1">
-            {
-                navOptions
-            }
-          </ul>
+
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
           {/* Dropdown Menu */}
           <MenuDropdown />
         </div>
