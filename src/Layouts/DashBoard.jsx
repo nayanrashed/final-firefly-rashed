@@ -4,11 +4,12 @@ import { FcComments } from "react-icons/fc";
 import { LiaComments } from "react-icons/lia";
 import { FaHome } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
+import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
   const { logOut } = useAuth();
    
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   const handleLogout = () => {
     logOut()
       .then(() => {})
