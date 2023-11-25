@@ -11,11 +11,11 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddPost = () => {
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
-  console.log(user);
+//   console.log(user);
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     const imageFile = { image: data.image[0] };
     const onTime =moment().format("dddd, MMMM D, YYYY");
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
@@ -41,7 +41,7 @@ const AddPost = () => {
         downVoteBy: [],
       };
       const postRes = await axiosSecure.post("/posts", postData);
-      console.log(postRes);
+    //   console.log(postRes);
       if (postRes.data.insertedId) {
         reset();
         Swal.fire({

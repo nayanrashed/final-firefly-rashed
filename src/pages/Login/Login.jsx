@@ -11,13 +11,13 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
@@ -42,9 +42,7 @@ const Login = () => {
         <div className="hero-content flex-col md:flex-row-reverse">
           <div className="text-center md:w-1/2 lg:text-left">
             <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              
-            </p>
+            <p className="py-6"></p>
           </div>
           <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleLogin} className="card-body">
@@ -90,7 +88,7 @@ const Login = () => {
               </small>
             </p>
             <div className="divider px-8">
-                <SocialLogin></SocialLogin>
+              <SocialLogin></SocialLogin>
             </div>
           </div>
         </div>
@@ -98,5 +96,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
