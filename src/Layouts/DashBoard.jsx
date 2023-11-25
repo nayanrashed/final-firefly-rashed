@@ -8,7 +8,7 @@ import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
   const { logOut } = useAuth();
-   
+
   const [isAdmin] = useAdmin();
   const handleLogout = () => {
     logOut()
@@ -22,7 +22,7 @@ const DashBoard = () => {
         <ul className="menu">
           {isAdmin ? (
             <>
-            <li>
+              <li>
                 <NavLink to="/dashboard/adminHome">
                   <FaPersonCircleCheck></FaPersonCircleCheck>
                   Admin Home

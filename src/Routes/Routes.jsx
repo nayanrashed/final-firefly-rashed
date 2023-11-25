@@ -15,6 +15,7 @@ import ManageUsers from "../pages/DashBoard/ManageUsers/ManageUsers";
 import ReportedActivities from "../pages/DashBoard/ReportedActivities/ReportedActivities";
 import MakeAnnouncements from "../pages/DashBoard/MakeAnnouncements/MakeAnnouncements";
 import AdminRoute from "./AdminRoute";
+import Comments from "../pages/DashBoard/Comments/Comments";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,11 @@ export const router = createBrowserRouter([
       {
         path: "myPosts",
         element: <MyPosts></MyPosts>,
+      },
+      {
+        path: "comments/:id",
+        element: <Comments></Comments>,
+        loader:({params})=>fetch(`http://localhost:5000/posts/${params.id}`)
       },
       // Admin Routes
       {
