@@ -5,12 +5,13 @@ import useAxiosSecure from "./useAxiosSecure";
 const useMyPosts = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const { data: myPosts = [], refetch } = useQuery({
+  console.log(user?.email);
+  const {refetch, data: myPosts = []  } = useQuery({
     queryKey: ["myPosts", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/posts?email=${user?.email}`);
+      const res = await axiosSecure.get(`/posts?email=${user?.email}`);      
       return res.data.reverse();
-    },
+    },    
   });
   return [myPosts,refetch];
 };

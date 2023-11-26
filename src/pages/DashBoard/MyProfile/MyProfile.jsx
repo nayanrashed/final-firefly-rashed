@@ -11,10 +11,12 @@ const MyProfile = () => {
   const { user } = useAuth();
   const [myPosts] = useMyPosts();
   const axiosSecure = useAxiosSecure();
+  
   const { data:userData } = useQuery({
     queryKey: ["myProfile", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users?email=${user?.email}`);
+      // const res = await axiosSecure.get(`/users?email=${user?.email}`);
+      const res = await axiosSecure.get(`/users/${user?.email}`);
       return res.data;
     },
   });
@@ -39,6 +41,7 @@ const MyProfile = () => {
         <div className="my-6">
             <p className="text-center">{user?.displayName}</p>
             <p className="text-center">{user?.email}</p>
+            <p className="text-center">{userData?.badge}</p>
         </div>
         
       </div>

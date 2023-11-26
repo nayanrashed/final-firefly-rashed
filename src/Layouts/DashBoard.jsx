@@ -23,17 +23,30 @@ const DashBoard = () => {
           {isAdmin ? (
             <>
               <li>
+                <NavLink to="/dashboard/myProfile">
+                  <FaPersonCircleCheck></FaPersonCircleCheck>
+                  My Profile
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/dashboard/adminHome">
                   <FaPersonCircleCheck></FaPersonCircleCheck>
                   Admin Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/adminProfile">
-                  <FaPersonCircleCheck></FaPersonCircleCheck>
-                  Admin Profile
+                <NavLink to="/dashboard/addPost">
+                  <FcComments />
+                  Add Post
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/myPosts">
+                  <LiaComments />
+                  My Posts
+                </NavLink>
+              </li>
+
               <li>
                 <NavLink to="/dashboard/manageUsers">
                   <FaPersonCircleCheck></FaPersonCircleCheck>
@@ -58,7 +71,7 @@ const DashBoard = () => {
               <li>
                 <NavLink to="/dashboard/myProfile">
                   <FaPersonCircleCheck></FaPersonCircleCheck>
-                  My Profile{" "}
+                  My Profile
                 </NavLink>
               </li>
               <li>

@@ -2,10 +2,12 @@ import avatar from "../../../assets/avatar.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+// import useAdmin from "../../../hooks/useAdmin";
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useAuth();
+  // const [isAdmin] = useAdmin();
   const handleLogout = () => {
     logOut()
       .then(() => {})
@@ -20,24 +22,25 @@ const MenuDropdown = () => {
       >
         <div className="md:block">
           {/* Avatar */}
-          {
-            user?<img
-            className="rounded-full"
-            referrerPolicy="no-referrer"
-            src={user?.photoURL}
-            alt="profile"
-            height="30"
-            width="30"
-          /> :<img
-            className="rounded-full"
-            referrerPolicy="no-referrer"
-            src={avatar}
-            alt="profile"
-            height="30"
-            width="30"
-          />
-          }
-          
+          {user ? (
+            <img
+              className="rounded-full"
+              referrerPolicy="no-referrer"
+              src={user?.photoURL}
+              alt="profile"
+              height="30"
+              width="30"
+            />
+          ) : (
+            <img
+              className="rounded-full"
+              referrerPolicy="no-referrer"
+              src={avatar}
+              alt="profile"
+              height="30"
+              width="30"
+            />
+          )}
         </div>
       </div>
 
@@ -47,6 +50,22 @@ const MenuDropdown = () => {
             <div className="px-4 py-3 text-center hover:bg-neutral-100 transition font-semibold">
               {user?.displayName && <p>{user?.displayName}</p>}
             </div>
+            {/* {user && isAdmin && (
+              <Link
+                to="/dashboard/adminHome"
+                className="px-4 py-3 text-center hover:bg-neutral-100 transition font-semibold"
+              >
+                Dashboard
+              </Link>
+            )}
+            {user && !isAdmin && (
+              <Link
+                to="/dashboard/myProfile"
+                className="px-4 py-3 text-center hover:bg-neutral-100 transition font-semibold"
+              >
+                Dashboard
+              </Link>
+            )} */}
 
             <Link
               to="/dashboard/myProfile"
@@ -54,6 +73,7 @@ const MenuDropdown = () => {
             >
               Dashboard
             </Link>
+
             {user ? (
               <>
                 <button

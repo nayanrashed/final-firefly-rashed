@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const MyPosts = () => {
   const [myPosts, refetch] = useMyPosts();
   const axiosSecure = useAxiosSecure();
+  console.log(myPosts);
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
