@@ -1,56 +1,93 @@
+import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import moment from 'moment';
+import moment from "moment";
+import useMyPosts from "../../../hooks/useMyPosts";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddPost = () => {
   const { register, handleSubmit, reset } = useForm();
+  const [myPosts] = useMyPosts();
+
   const { user } = useAuth();
-//   console.log(user);
+  const navigate = useNavigate();
+  
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+
+  const { data: userData,status:userStatus } = useQuery({
+    queryKey: ["myProfile", user?.email],
+    queryFn: async () => {
+     
+      const res = await axiosSecure.get(`/users/${user?.email}`);
+      return res.data;
+    },
+  });
+
+  if(userStatus==="loading"){
+    <span className="loading loading-dots loading-lg"></span>
+  }
+  const badge = userData?.badge || "bronze";
+  
+
+
   const onSubmit = async (data) => {
     // console.log(data);
     const imageFile = { image: data.image[0] };
-    const onTime =moment().format("dddd, MMMM D, YYYY");
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    console.log(res.data);
-    if (res.data.success) {
-      const postData = {
-        title: data.postTitle,
-        tags: data.tags,
-        readingTime: parseInt(data.readingTime),
-        description: data.description,
-        image: res.data.data.display_url,
-        authorName: user?.displayName,
-        authorPhoto: user?.photoURL,
-        authorEmail: user?.email,
-        postTime:onTime,
-        upVote: 0,
-        upVoteBy: [],
-        downVote: 0,
-        downVoteBy: [],
-      };
-      const postRes = await axiosSecure.post("/posts", postData);
-    //   console.log(postRes);
-      if (postRes.data.insertedId) {
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your post added successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+    const onTime = moment().format("dddd, MMMM D, YYYY");
+
+    if (badge === 'bronze' && myPosts?.length >= 5) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Please update your Membership",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/membership");
+      return;
+    } else {
+      const res = await axiosPublic.post(image_hosting_api, imageFile, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      console.log(res.data);
+      if (res.data.success) {
+        const postData = {
+          title: data.postTitle,
+          tags: data.tags,
+          readingTime: parseInt(data.readingTime),
+          description: data.description,
+          image: res.data.data.display_url,
+          authorName: user?.displayName,
+          authorPhoto: user?.photoURL,
+          authorEmail: user?.email,
+          postTime: onTime,
+          upVote: 0,
+          upVoteBy: [],
+          downVote: 0,
+          downVoteBy: [],
+        };
+        const postRes = await axiosSecure.post("/posts", postData);
+
+        if (postRes.data.insertedId) {
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your post added successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       }
     }
   };
