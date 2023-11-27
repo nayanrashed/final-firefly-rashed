@@ -10,7 +10,7 @@ const usePosts = () => {
   } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/menu");
+      const res = await axiosPublic.get("/posts");
       return res.data.reverse();
     },
   });
