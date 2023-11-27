@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 
 const Post = () => {
   const {
+    // eslint-disable-next-line no-unused-vars
     _id,
     title,
     tags,
@@ -17,6 +18,7 @@ const Post = () => {
   } = useLoaderData();
   console.log(title);
   return (
+    
     <div className="w-3/5 mx-auto ">
       <h2 className="text-3xl font-semibold border-r-2">{title}</h2>
       <div className="flex items-center">
