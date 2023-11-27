@@ -16,6 +16,7 @@ import ReportedActivities from "../pages/DashBoard/ReportedActivities/ReportedAc
 import MakeAnnouncements from "../pages/DashBoard/MakeAnnouncements/MakeAnnouncements";
 import AdminRoute from "./AdminRoute";
 import Comments from "../pages/DashBoard/Comments/Comments";
+import Post from "../pages/Post/Post";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,12 @@ export const router = createBrowserRouter([
         path: "joinUs",
         element: <JoinUs></JoinUs>,
       },
+      {
+        path: "posts/:id",
+        element: <Post></Post>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/posts/${params.id}`),
+      },
     ],
   },
   {
@@ -64,28 +71,49 @@ export const router = createBrowserRouter([
       {
         path: "comments/:id",
         element: <Comments></Comments>,
-        loader:({params})=>fetch(`http://localhost:5000/posts/${params.id}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/posts/${params.id}`),
       },
       // Admin Routes
       {
         path: "adminHome",
-        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "adminProfile",
-        element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AdminProfile></AdminProfile>
+          </AdminRoute>
+        ),
       },
       {
         path: "manageUsers",
-        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "reportedActivities",
-        element: <AdminRoute><ReportedActivities></ReportedActivities></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <ReportedActivities></ReportedActivities>
+          </AdminRoute>
+        ),
       },
       {
         path: "makeAnnouncements",
-        element: <AdminRoute><MakeAnnouncements></MakeAnnouncements></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <MakeAnnouncements></MakeAnnouncements>
+          </AdminRoute>
+        ),
       },
     ],
   },
