@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useSearch from "../../../hooks/useSearch";
 import Banner from "../Banner/Banner";
 import usePosts from "../../../hooks/usePosts";
+import PostCard from "../PostCard/PostCard";
 
 const Home = () => {
   const [posts] = usePosts();
@@ -9,7 +10,7 @@ const Home = () => {
   const [searchData, setSearchData] = useState("");
 
   const [searchedPosts] = useSearch(searchData);
-  
+
   useEffect(() => {
     setDisplayPosts(searchedPosts);
   }, [searchedPosts]);
@@ -27,6 +28,11 @@ const Home = () => {
         <div className=" w-1/3 border border-green-600"> Tags</div>
         <div className=" w-2/3 border border-green-600">
           Posts: {displayPosts.length}
+          <div>
+            {displayPosts.map((post) => (
+              <PostCard key={post._id} post={post}></PostCard>
+            ))}
+          </div>
         </div>
       </div>
     </>

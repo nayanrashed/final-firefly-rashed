@@ -17,7 +17,7 @@ const Banner = ({handleSearch}) => {
           </p>
           <form onSubmit={(e)=>handleSearch(e,e.target.searchField.value)} className="join">
             <input
-              className="input input-bordered join-item"
+              className="input input-bordered join-item font-semibold"
               name="searchField"
               placeholder="Search by tags..."
             />
