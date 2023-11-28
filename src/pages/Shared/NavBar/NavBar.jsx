@@ -2,8 +2,12 @@ import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import MenuDropdown from "./MenuDropdown";
 import { FaBell } from "react-icons/fa";
+import useAuth from "../../../hooks/useAuth";
+import useAnnouncements from "../../../hooks/useAnnouncements";
 
 const NavBar = () => {
+  const {user}=useAuth();
+  const [announcements]=useAnnouncements()
   const navOptions = (
     <>
       <li>
@@ -15,12 +19,14 @@ const NavBar = () => {
       <li>
         <Link to="/">
           <FaBell></FaBell>
-          <div className="badge badge-secondary">+0</div>
+          <div className="badge badge-secondary">{announcements.length}</div>
         </Link>
       </li>
-      <li>
+      {
+        !user&&<li>
         <Link to="/login">Join Us</Link>
       </li>
+      }
     </>
   );
   return (

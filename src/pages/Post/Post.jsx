@@ -1,5 +1,9 @@
-import { EmailShareButton, FacebookShareButton,EmailIcon,
-  FacebookIcon, } from "react-share";
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  EmailIcon,
+  FacebookIcon,
+} from "react-share";
 import {
   FaComments,
   FaRegThumbsDown,
@@ -86,7 +90,7 @@ const Post = () => {
     ) {
       const newUpVoteBy = [...upVoteBy, user?.email];
       const newUpVote = upVote + 1;
-      const newDownVoteBy = downVoteBy.filter((item) => item === !user?.email);
+      const newDownVoteBy = downVoteBy.filter((item) => item !== user?.email);
       const newDownVote = downVote - 1;
       const updateItem = {
         upVote: newUpVote,
@@ -158,7 +162,7 @@ const Post = () => {
       upVoteBy.includes(user?.email) &&
       !downVoteBy.includes(user?.email)
     ) {
-      const newUpVoteBy = upVoteBy.filter((item) => item === !user?.email);
+      const newUpVoteBy = upVoteBy.filter((item) => item !== user?.email);
       const newUpVote = upVote - 1;
       const newDownVoteBy = [...downVoteBy, user?.email];
       const newDownVote = downVote + 1;
@@ -307,10 +311,16 @@ const Post = () => {
             Share <FaShare />
           </button>
           <div className="">
-            <EmailShareButton url={`http://localhost:5173/posts/${_id}`} className="mx-2"><EmailIcon size={32} round={true}></EmailIcon></EmailShareButton>
-            <FacebookShareButton url={`http://localhost:5173/posts/${_id}`} ><FacebookIcon size={32} round={true}></FacebookIcon></FacebookShareButton>
+            <EmailShareButton
+              url={`http://localhost:5173/posts/${_id}`}
+              className="mx-2"
+            >
+              <EmailIcon size={32} round={true}></EmailIcon>
+            </EmailShareButton>
+            <FacebookShareButton url={`http://localhost:5173/posts/${_id}`}>
+              <FacebookIcon size={32} round={true}></FacebookIcon>
+            </FacebookShareButton>
           </div>
-
         </div>
       </div>
     </div>
