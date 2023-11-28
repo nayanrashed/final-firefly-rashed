@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import useMyPosts from "../../../hooks/useMyPosts";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -18,32 +17,29 @@ const AddPost = () => {
 
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
-  const { data: userData,status:userStatus } = useQuery({
+  const { data: userData, status: userStatus } = useQuery({
     queryKey: ["myProfile", user?.email],
     queryFn: async () => {
-     
       const res = await axiosSecure.get(`/users/${user?.email}`);
       return res.data;
     },
   });
 
-  if(userStatus==="loading"){
-    <span className="loading loading-dots loading-lg"></span>
+  if (userStatus === "loading") {
+    <span className="loading loading-dots loading-lg"></span>;
   }
   const badge = userData?.badge || "bronze";
-  
-
 
   const onSubmit = async (data) => {
     // console.log(data);
     const imageFile = { image: data.image[0] };
     const onTime = moment().format("dddd, MMMM D, YYYY");
 
-    if (badge === 'bronze' && myPosts?.length >= 5) {
+    if (badge === "bronze" && myPosts?.length >= 5) {
       Swal.fire({
         position: "top-end",
         icon: "error",

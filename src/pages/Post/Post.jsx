@@ -1,3 +1,5 @@
+import { EmailShareButton, FacebookShareButton,EmailIcon,
+  FacebookIcon, } from "react-share";
 import {
   FaComments,
   FaRegThumbsDown,
@@ -179,7 +181,7 @@ const Post = () => {
       setUpVoteCount(newUpVote);
     }
   };
-  const handleGiveComments = async(e) => {
+  const handleGiveComments = async (e) => {
     e.preventDefault();
     const comments = e.target.comments.value;
     console.log(comments);
@@ -194,22 +196,26 @@ const Post = () => {
       navigate("/login");
       return;
     }
-    const commentData={ comments,title,postId:_id,commentsBy:user?.email};
+    const commentData = {
+      comments,
+      title,
+      postId: _id,
+      commentsBy: user?.email,
+    };
     // console.log(commentData);
     const commentRes = await axiosSecure.post("/comments", commentData);
-  
-      if (commentRes.data.insertedId) {
-        
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your thoughts added successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
+
+    if (commentRes.data.insertedId) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your thoughts added successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
-  
+  };
+
   return (
     <div className="w-3/5 mx-auto ">
       <h2 className="text-3xl font-semibold border-r-2">{title}</h2>
@@ -300,6 +306,11 @@ const Post = () => {
           <button className="flex btn btn-sm btn-ghost items-center gap-2 border-r-2 pr-2">
             Share <FaShare />
           </button>
+          <div className="">
+            <EmailShareButton url={`http://localhost:5173/posts/${_id}`} className="mx-2"><EmailIcon size={32} round={true}></EmailIcon></EmailShareButton>
+            <FacebookShareButton url={`http://localhost:5173/posts/${_id}`} ><FacebookIcon size={32} round={true}></FacebookIcon></FacebookShareButton>
+          </div>
+
         </div>
       </div>
     </div>
