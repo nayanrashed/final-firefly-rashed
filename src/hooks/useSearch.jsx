@@ -5,11 +5,12 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useSearch = (search) => {
     const axiosPublic = useAxiosPublic();
+   
   
   const {data: searchedPosts = [],refetch, isPending: loading } = useQuery({
     queryKey: ["searchPost", search],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/posts/${search}`);      
+      const res = await axiosPublic.get(`/posts?tags=${search}`);      
       return res.data.reverse();
     },    
   });

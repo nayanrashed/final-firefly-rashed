@@ -10,16 +10,17 @@ const Home = () => {
   const [searchData, setSearchData] = useState("");
 
   const [searchedPosts] = useSearch(searchData);
+  console.log(searchData);
 
   useEffect(() => {
     setDisplayPosts(searchedPosts);
   }, [searchedPosts]);
 
-  console.log(posts);
+  // console.log(posts);
   const handleSearch = (e, value) => {
     e.preventDefault();
     setSearchData(value);
-    // setDisplayPosts(searchedPosts);
+    
   };
   return (
     <>
