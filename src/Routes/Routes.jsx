@@ -17,6 +17,7 @@ import MakeAnnouncements from "../pages/DashBoard/MakeAnnouncements/MakeAnnounce
 import AdminRoute from "./AdminRoute";
 import Comments from "../pages/DashBoard/Comments/Comments";
 import Post from "../pages/Post/Post";
+import Payment from "../pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/posts/${params.id}`),
       },
+      {
+        path:'payment',
+        element:<Payment></Payment>
+      }
     ],
   },
   {
