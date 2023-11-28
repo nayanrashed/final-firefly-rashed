@@ -1,26 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
 const Payment = () => {
-    const { user } = useAuth();    
-    const axiosSecure = useAxiosSecure();
-    
-    const { data:userData } = useQuery({
-      queryKey: ["myProfile", user?.email],
-      queryFn: async () => {
-        // const res = await axiosSecure.get(`/users?email=${user?.email}`);
-        const res = await axiosSecure.get(`/users/${user?.email}`);
-        return res.data;
-      },
-    });
-    console.log(userData);
-    return (
-        <div>
-            <h3 className="text-2xl">Payment</h3>
-        </div>
-    );
+  const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
+  return (
+    <div>
+      <div>
+        <Elements stripe={stripePromise}>
+          <CheckoutForm></CheckoutForm>
+        </Elements>
+      </div>
+    </div>
+  );
 };
 
 export default Payment;
