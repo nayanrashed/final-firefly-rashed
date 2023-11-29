@@ -1,23 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [error,setError]=useState();
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors },
+  } = useForm();
 
   const from = location.state?.from?.pathname || "/";
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-    // console.log(email, password);
+  const onSubmit = (data) => {
+    console.log(data);
+    const email = data.email;
+    const password = data.password;
+
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
@@ -31,7 +38,17 @@ const Login = () => {
         },
       });
       navigate(from, { replace: true });
-    });
+    })
+    .catch(error=>{
+      console.error(error);
+        setError(error.message);
+        Swal.fire({
+          title: 'Error!!!',
+          text: 'Wrong Email or Password',
+          icon: 'error',
+          confirmButtonText: 'Close'
+        })
+    })
   };
   return (
     <div>
@@ -45,13 +62,14 @@ const Login = () => {
             <p className="py-6"></p>
           </div>
           <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleLogin} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
                   type="email"
+                  {...register("email", { required: true })}
                   name="email"
                   placeholder="email"
                   className="input input-bordered"
@@ -63,15 +81,36 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  })}
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-600">Password must be 6 characters</p>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-red-600">
+                    Password must be less than 20 characters
+                  </p>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600">
+                    Password must have one Uppercase one lower case, one number
+                    and one special character.
+                  </p>
+                )}
+                {
+                  error&&<p className="text-red-600">{error}</p>
+                }
               </div>
 
               <div className="form-control mt-6">

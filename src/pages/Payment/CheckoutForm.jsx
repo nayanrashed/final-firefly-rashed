@@ -6,6 +6,7 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
+
 const CheckoutForm = () => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -23,6 +24,8 @@ const CheckoutForm = () => {
       setClientSecret(res.data.clientSecret);
     });
   }, [axiosSecure]);
+ 
+  
 
   const handleSubmit = async (event) => {
     const onTime = moment().format("dddd, MMMM D, YYYY");
@@ -81,6 +84,19 @@ const CheckoutForm = () => {
           });
           navigate("/");
         }
+        axiosSecure.patch(`/users/badge/${user?.email}`).then((res) => {
+            console.log(res.data);
+            if (res.data.modifiedCount > 0) {
+             
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `Congratulations you are become a "Gold" member now!`,
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          });
       }
     }
   };
