@@ -20,7 +20,7 @@ const AdminHome = () => {
       return res.data;
     },
   });
-  console.log(userData);
+  // console.log(userData);
   const { data: stats } = useQuery({
     queryKey: ["admin-stats"],
     queryFn: async () => {
@@ -28,7 +28,7 @@ const AdminHome = () => {
       return res.data;
     },
   });
-  console.log(user);
+  // console.log(user);
   const handleAddTags=async(e)=>{
     e.preventDefault();
     const name = e.target.tagName.value;
@@ -51,16 +51,16 @@ const AdminHome = () => {
   return (
     <div>
       <h2 className="text-2xl text-center"> Admin Home</h2>
-      <div className="flex w-full justify-center items-center">
-        <div className="bg-amber-400 rounded-full p-2 mr-6 ">
-          <img className="rounded-full" src={user.photoURL} alt="" />
+      <div className="flex w-full justify-center items-center my-4">
+        <div className="bg-amber-400 rounded-full p-1 mr-6 ">
+          <img className="rounded-full" src={user?.photoURL} alt="" />
         </div>
         <div>
           <p>
-            Name: <span className="font-semibold">{user.displayName}</span>
+            Name: <span className="font-semibold">{user?.displayName}</span>
           </p>
           <p>
-            Email: <span className="font-semibold">{user.email}</span>
+            Email: <span className="font-semibold">{user?.email}</span>
           </p>
           <p>
             Membership Status:{" "}
@@ -104,11 +104,13 @@ const AdminHome = () => {
             <FaDollarSign />
           </div>
           <div className="stat-title">Revenue</div>
-          <div className="stat-value">{stats?.revenue.toFixed(2)}</div>
+          <div className="stat-value">{stats?.revenue?.toFixed(2)}</div>
         </div>
       </div>
       <div>
+      
         <form onSubmit={handleAddTags} className="card-body">
+        <h2 className="text-2xl text-center"> Add Tag Item</h2>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Tag Name</span>
@@ -121,6 +123,7 @@ const AdminHome = () => {
               required
             />
           </div>
+          
           <div className="form-control">
             <label className="label">
               <span className="label-text">Tag Details</span>
@@ -138,7 +141,7 @@ const AdminHome = () => {
           <div className="form-control mt-6">
             <input
               
-              className="btn btn-primary"
+              className="btn bg-amber-400"
               type="submit"
               value="Add Tag"
             />

@@ -37,13 +37,13 @@ const MyPosts = () => {
   return (
     <>
       <div>
-        <h3 className="text-3xl">My Posts:{myPosts.length}</h3>
+        <h3 className="text-3xl text-center my-2">My Posts:{myPosts.length}</h3>
       </div>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
           <thead>
-            <tr>
+            <tr className="bg-amber-400 text-black">
               <th>#</th>
               <th>Post Title</th>
               <th>Number of Votes</th>
@@ -53,7 +53,7 @@ const MyPosts = () => {
           </thead>
           <tbody>
             {myPosts.map((post, index) => (
-              <tr key={post._id}>
+              <tr className=""  key={post._id}>
                 <th>{index + 1}</th>
                 <td>{post.title}</td>
                 <td>

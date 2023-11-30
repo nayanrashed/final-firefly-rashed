@@ -43,14 +43,14 @@ const ReportedActivities = () => {
   return (
     <div>
       <div>
-        <h3 className="text-3xl text-center">Manage Repots</h3>
+        <h3 className="text-3xl text-center my-2">Manage Repots</h3>
       </div>
       <div>
         <div className="overflow-x-auto">
           <table className="table table-zebra">
             {/* head */}
             <thead>
-              <tr>
+              <tr className="bg-amber-400 text-black">
                 <th>#</th>
                 <th>Comments</th>
                 <th>Comments By</th>
@@ -63,13 +63,13 @@ const ReportedActivities = () => {
               {reportedComments.map((report, index) => (
                 <tr key={report._id}>
                   <th>{index + 1}</th>
-                  <td>{report.comments}</td>
-                  <td>{report.commentsBy}</td>
-                  <td>{report.title}</td>
-                  <td>{report.report}</td>
+                  <td>{report?.comments}</td>
+                  <td>{report?.commentsBy}</td>
+                  <td>{report?.title}</td>
+                  <td>{report?.report}</td>
                   <td>
                     <button
-                      onClick={() => handleDelete(report._id)}
+                      onClick={() => handleDelete(report?._id)}
                       className="btn btn-ghost btn-sm"
                     >
                       Delete

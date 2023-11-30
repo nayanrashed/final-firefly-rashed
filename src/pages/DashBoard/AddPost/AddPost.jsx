@@ -109,7 +109,7 @@ const AddPost = () => {
       ) : (
         <div>
           <div>
-            <h3 className="text-3xl">Add Post</h3>
+            <h3 className="text-3xl text-center mb-2">Add Post</h3>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control w-full">
@@ -175,7 +175,7 @@ const AddPost = () => {
                 className="file-input file-input-bordered w-full max-w-xs"
               />
             </div>
-            <button className="btn">Add Post</button>
+            <button className="btn bg-amber-400">Add Post</button>
           </form>
         </div>
       )}

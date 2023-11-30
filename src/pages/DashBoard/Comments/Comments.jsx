@@ -44,8 +44,8 @@ const Comments = () => {
     const report = selectedOption.value;
     const reportData = { report };
     const commentRes = await axiosSecure.patch(`/comments/${id}`, reportData);
-    console.log("comment ID", id);
-    console.log(commentRes.data);
+    // console.log("comment ID", id);
+    // console.log(commentRes.data);
 
     if (commentRes.data.modifiedCount > 0) {
       Swal.fire({
@@ -70,7 +70,7 @@ const Comments = () => {
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           <thead>
-            <tr>
+            <tr className="bg-amber-400 text-black">
               <th>#</th>
               <th>Comments</th>
               <th>Feedback</th>
@@ -80,7 +80,7 @@ const Comments = () => {
 
           <tbody>
             {/* row 1 */}
-            {searchedComments.map((comment, index) => (
+            {searchedComments?.map((comment, index) => (
               <tr key={comment._id}>
                 <th>{index + 1}</th>
                 <td>
@@ -89,15 +89,15 @@ const Comments = () => {
                       <FaUser></FaUser>
                       <span className="font-semibold">
                         {" "}
-                        {comment.commentsBy}
+                        {comment?.commentsBy}
                       </span>
                     </p>
                     <div className="flex items-center gap-2">
                       <FaComment></FaComment>
                       {state ? (
-                        <p> {comment.comments}</p>
+                        <p> {comment?.comments}</p>
                       ) : (
-                        <p>{comment.comments.slice(0, 20)}</p>
+                        <p>{comment?.comments.slice(0, 20)}</p>
                       )}
                       <p
                         className="btn btn-ghost btn-xs font-semibold"

@@ -12,7 +12,7 @@ const MakeAnnouncements = () => {
   const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
     // console.log(data);
-  
+
     const onTime = moment().format("dddd, MMMM D, YYYY");
 
     const announcementData = {
@@ -39,7 +39,7 @@ const MakeAnnouncements = () => {
   return (
     <>
       <div>
-        <h3 className="text-3xl">Make Announcement</h3>
+        <h3 className="text-3xl text-center mb-2">Make Announcement</h3>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full">
@@ -53,7 +53,7 @@ const MakeAnnouncements = () => {
             className="input input-bordered w-full"
           />
         </div>
-        
+
         <div className="form-control">
           <label className="label">
             <span className="label-text">Description</span>
@@ -64,8 +64,7 @@ const MakeAnnouncements = () => {
             placeholder="Description"
           ></textarea>
         </div>
-       
-        <button className="btn">Add Post</button>
+        <button className="btn my-2 bg-amber-400">Add Post</button>
       </form>
     </>
   );

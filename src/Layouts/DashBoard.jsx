@@ -1,4 +1,5 @@
-import { FaPersonCircleCheck } from "react-icons/fa6";
+import { FaBullhorn, FaPerson, FaPersonCircleCheck, FaUsers } from "react-icons/fa6";
+import { MdOutlineReport } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { FcComments } from "react-icons/fc";
 import { LiaComments } from "react-icons/lia";
@@ -21,12 +22,12 @@ const DashBoard = () => {
     <div>
       <div className="z-50 drawer lg:hidden">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex justify-between m-2 p-2 border-b">
+        <div className="drawer-content flex justify-between m-2 p-2 border-b border-amber-400">
           {/* Page content here */}
-          <label htmlFor="my-drawer" className="btn  btn-sm drawer-button">
+          <label htmlFor="my-drawer" className="btn  btn-sm drawer-button bg-amber-400">
             <IoMenu /> Dashboard
           </label>
-         <Link> <img className="w-10 h-10 rounded-full" src={logo} alt="" /></Link>
+         <Link to='/'> <img className="w-10 h-10 rounded-full" src={logo} alt="" /></Link>
         </div>
         <div className="drawer-side">
           <label
@@ -46,7 +47,7 @@ const DashBoard = () => {
                   </li>
                   <li>
                     <NavLink to="/dashboard/myProfile">
-                      <FaPersonCircleCheck></FaPersonCircleCheck>
+                    <FaPerson />
                       My Profile
                     </NavLink>
                   </li>
@@ -64,19 +65,19 @@ const DashBoard = () => {
                   </li>
                   <li>
                     <NavLink to="/dashboard/manageUsers">
-                      <FaPersonCircleCheck></FaPersonCircleCheck>
+                    <FaUsers />
                       Manage Users
                     </NavLink>
                   </li>
                   <li>
                     <NavLink to="/dashboard/reportedActivities">
-                      <FaPersonCircleCheck></FaPersonCircleCheck>
+                      <MdOutlineReport/>
                       Reported Activities
                     </NavLink>
                   </li>
                   <li>
                     <NavLink to="/dashboard/makeAnnouncements">
-                      <FaPersonCircleCheck></FaPersonCircleCheck>
+                      <FaBullhorn/>
                       Make Announcements
                     </NavLink>
                   </li>
@@ -85,7 +86,7 @@ const DashBoard = () => {
                 <>
                   <li>
                     <NavLink to="/dashboard/myProfile">
-                      <FaPersonCircleCheck></FaPersonCircleCheck>
+                    <FaPerson />
                       My Profile
                     </NavLink>
                   </li>
@@ -141,7 +142,7 @@ const DashBoard = () => {
                 </li>
                 <li>
                   <NavLink to="/dashboard/myProfile">
-                    <FaPersonCircleCheck></FaPersonCircleCheck>
+                  <FaPerson />
                     My Profile
                   </NavLink>
                 </li>
@@ -159,19 +160,19 @@ const DashBoard = () => {
                 </li>
                 <li>
                   <NavLink to="/dashboard/manageUsers">
-                    <FaPersonCircleCheck></FaPersonCircleCheck>
+                  <FaUsers />
                     Manage Users
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/reportedActivities">
-                    <FaPersonCircleCheck></FaPersonCircleCheck>
+                  <MdOutlineReport/>
                     Reported Activities
                   </NavLink>
                 </li>
                 <li>
                   <NavLink to="/dashboard/makeAnnouncements">
-                    <FaPersonCircleCheck></FaPersonCircleCheck>
+                  <FaBullhorn/>
                     Make Announcements
                   </NavLink>
                 </li>

@@ -28,7 +28,7 @@ const ManageUsers = () => {
 
   const handleMakeAdmin = (user) => {
     axiosSecure.patch(`/users/admin/${user?._id}`).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.modifiedCount > 0) {
         refetch();
         Swal.fire({
@@ -49,18 +49,17 @@ const ManageUsers = () => {
   };
   return (
     <div>
-      <div className="flex justify-evenly">
-        <h3 className="text-3xl">All Users</h3>
-        <h3 className="text-3xl">Total Users:{users.length}</h3>
+      <div className="flex justify-center">        
+        <h3 className="text-3xl my-2">Total Users:{users?.length}</h3>
       </div>
-      <div>
+      <div className="flex justify-center my-2">
         <form onSubmit={handleSearchUser} className="join">
           <input
             className="input input-bordered join-item font-semibold"
             name="searchField"
             placeholder="Search user by Name"
           />
-          <button className="btn join-item">
+          <button className="btn join-item bg-amber-400">
             <FaSearch />
           </button>
         </form>
@@ -69,7 +68,7 @@ const ManageUsers = () => {
         <table className="table table-zebra">
           {/* head */}
           <thead>
-            <tr>
+            <tr className="bg-amber-400 text-black">
               <th>#</th>
               <th>Name</th>
               <th>Email</th>

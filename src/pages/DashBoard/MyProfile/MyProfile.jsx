@@ -52,7 +52,7 @@ const MyProfile = () => {
         <table className="table table-zebra">
           {/* head */}
           <thead>
-            <tr>
+            <tr className="bg-amber-400 text-black">
               <th>#</th>
               <th>Image</th>
               <th>Post Title</th>
@@ -61,28 +61,28 @@ const MyProfile = () => {
             </tr>
           </thead>
           <tbody>
-            {myPosts.slice(0, 3).map((post, index) => (
-              <tr key={post._id}>
+            {myPosts?.slice(0, 3).map((post, index) => (
+              <tr key={post?._id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
                       <img
-                        src={post.image}
+                        src={post?.image}
                         alt="Avatar Tailwind CSS Component"
                       />
                     </div>
                   </div>
                 </td>
-                <td>{post.title}</td>
+                <td>{post?.title}</td>
                 <td>
                   <button className="btn btn-sm">
                     <FaThumbsUp></FaThumbsUp>
-                    {post.upVote}
+                    {post?.upVote}
                   </button>{" "}
                   <button className="btn btn-sm">
                     <FaThumbsDown></FaThumbsDown>
-                    {post.upVote}
+                    {post?.upVote}
                   </button>
                 </td>
                 <td>
