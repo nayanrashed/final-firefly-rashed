@@ -225,7 +225,7 @@ const Post = () => {
   };
 
   return (
-    <div className="w-3/5 mx-auto ">
+    <div className="lg:w-3/5 mx-auto ">
       <h2 className="text-3xl font-semibold border-r-2">{title}</h2>
       <div className="flex items-center">
         <img className="w-12 h-12 rounded-full" src={authorPhoto} alt="" />
@@ -261,8 +261,9 @@ const Post = () => {
           {description}
         </p>
       </div>
-      <div className="flex flex-row-reverse justify-between border-y-2 py-2 ">
-        <div className="flex">
+      <div className="flex flex-row-reverse items-center justify-between border-y-2 py-2 ">
+        <div className="flex ">
+          <p className="font-semibold">Vote </p>
           <button
             onClick={handleUpVote}
             className="btn btn-sm btn-ghost flex items-center px-6"
@@ -311,7 +312,7 @@ const Post = () => {
               </div>
             </form>
           </dialog>
-          <button className="flex btn btn-sm btn-ghost items-center gap-2 border-r-2 pr-2">
+          <button className="hidden md:flex btn btn-sm btn-ghost items-center gap-2 border-r-2 pr-2">
             Share <FaShare />
           </button>
           <div className="">
@@ -330,7 +331,7 @@ const Post = () => {
       <div className="w-full">
         <p className="text-xl font-semibold my-2">Comments</p>
         {searchedComments.map((comment) => (
-          <div className="flex my-4 w-3/4 mx-auto" key={comment._id}>
+          <div className="flex my-4 md:w-3/4 mx-auto" key={comment._id}>
             <div className="bg-amber-500 w-12 h-12 rounded-full flex justify-center items-center mr-2">
               <FaUser className="text-xl"></FaUser>
             </div>

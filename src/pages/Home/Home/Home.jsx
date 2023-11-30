@@ -72,9 +72,10 @@ const Home = () => {
     <>
       <Banner handleSearch={handleSearch}></Banner>
       <Announcement></Announcement>
-      <div className="flex w-full  ">
-        <div className=" w-1/3 ">
-          <div className="grid md:grid-cols-2 px-8 py-6">
+      <div className="lg:flex w-full  ">
+        <div className=" lg:w-1/3 ">
+          <p className="text-center text-2xl my-2">Tags</p>
+          <div className="grid grid-cols-3 lg:grid-cols-2 px-8 py-6">
             {tags.map((tag) => (
               <button
                 key={tag._id}
@@ -86,9 +87,9 @@ const Home = () => {
             ))}
           </div>
         </div>
-        <div className=" w-2/3">
+        <div className="w-full lg:w-2/3">
           {/* Posts: {displayPosts?.length} */}
-          <div className="">
+          <div className="w-full">
             {displayPosts?.map((post) => (
               <PostCard key={post._id} post={post}></PostCard>
             ))}

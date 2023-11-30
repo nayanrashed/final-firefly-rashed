@@ -18,17 +18,17 @@ const PostCard = ({ post }) => {
     downVote,
   } = post;
   const [searchedComments] = useSearchedComments(_id);
-  console.log(searchedComments);
+  // console.log(searchedComments);
  
   
   return (
     <>
       <Link to={`/posts/${_id}`}>
-        <div className="md:flex w-full md:h-44 my-3">
-          <div className="w-1/3">
+        <div className="md:flex w-full lg:h-44 my-4 shadow-sm shadow-amber-50">
+          <div className="md:w-1/3">
             <img className="w-full h-full" src={image} alt="image" />
           </div>
-          <div className="w-2/3 px-6 pt-4">
+          <div className="md:w-2/3 px-6 pt-4">
             <p className="text-xl font-semibold">{title}</p>
             <div className="flex items-center">
               <img
