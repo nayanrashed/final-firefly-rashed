@@ -8,6 +8,7 @@ import {
   FaPodcast,
   FaUsers,
 } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AdminHome = () => {
   const { user } = useAuth();
@@ -28,6 +29,25 @@ const AdminHome = () => {
     },
   });
   console.log(user);
+  const handleAddTags=async(e)=>{
+    e.preventDefault();
+    const name = e.target.tagName.value;
+    const description = e.target.description.value;
+    // console.log(name,description);
+    const tagData={name,description}
+    const tagRes = await axiosSecure.post("/tags", tagData);
+
+        if (tagRes.data.insertedId) {
+          
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Tag added successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+  }
   return (
     <div>
       <h2 className="text-2xl text-center"> Admin Home</h2>
@@ -36,13 +56,20 @@ const AdminHome = () => {
           <img className="rounded-full" src={user.photoURL} alt="" />
         </div>
         <div>
-          <p>Name: <span className="font-semibold">{user.displayName}</span></p>
-          <p>Email: <span className="font-semibold">{user.email}</span></p>
-          <p>Membership Status: <span className="uppercase">{userData?.badge}</span></p>
+          <p>
+            Name: <span className="font-semibold">{user.displayName}</span>
+          </p>
+          <p>
+            Email: <span className="font-semibold">{user.email}</span>
+          </p>
+          <p>
+            Membership Status:{" "}
+            <span className="uppercase">{userData?.badge}</span>
+          </p>
           <p>Admin</p>
         </div>
       </div>
-      <div className="stats shadow">
+      <div className="md:stats shadow">
         <div className="stat">
           <div className="stat-figure text-secondary">
             <FaUsers></FaUsers>
@@ -56,7 +83,6 @@ const AdminHome = () => {
           </div>
           <div className="stat-title">Posts</div>
           <div className="stat-value">{stats?.totalPosts}</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
         </div>
 
         <div className="stat">
@@ -65,7 +91,6 @@ const AdminHome = () => {
           </div>
           <div className="stat-title">Comments</div>
           <div className="stat-value">{stats?.commentsCount}</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
         </div>
         <div className="stat">
           <div className="stat-figure text-secondary">
@@ -73,7 +98,6 @@ const AdminHome = () => {
           </div>
           <div className="stat-title">Orders</div>
           <div className="stat-value">{stats?.paymentsCount}</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
         </div>
         <div className="stat">
           <div className="stat-figure text-secondary">
@@ -81,8 +105,45 @@ const AdminHome = () => {
           </div>
           <div className="stat-title">Revenue</div>
           <div className="stat-value">{stats?.revenue.toFixed(2)}</div>
-          <div className="stat-desc">Jan 1st - Feb 1st</div>
         </div>
+      </div>
+      <div>
+        <form onSubmit={handleAddTags} className="card-body">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Tag Name</span>
+            </label>
+            <input
+              type="text"
+              name="tagName"
+              placeholder="EnterTag Name"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Tag Details</span>
+            </label>
+            <input
+              type="text"
+              name="description"
+              placeholder="Tag Description"
+              className="input input-bordered"
+              required
+            />
+           
+          </div>
+          
+          <div className="form-control mt-6">
+            <input
+              
+              className="btn btn-primary"
+              type="submit"
+              value="Add Tag"
+            />
+          </div>
+        </form>
       </div>
     </div>
   );
