@@ -30,7 +30,7 @@ const Home = () => {
 
   //code for Pagination
   useEffect(() => {
-    fetch("http://localhost:5000/postsCount")
+    fetch("/postsCount")
       .then((res) => res.json())
       .then((data) => {
         setCount(data.count);
@@ -38,7 +38,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/posts?page=${currentPage}&size=${itemPerPage}`)
+    fetch(`https://y-gray-iota.vercel.app/posts?page=${currentPage}&size=${itemPerPage}`)
       .then((res) => res.json())
       .then((data) => setDisplayPosts(data.reverse()));
   }, [currentPage, itemPerPage]);

@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
         path: "posts/:id",
         element: <Post></Post>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/posts/${params.id}`),
+          fetch(`https://y-gray-iota.vercel.app/posts/${params.id}`),
       },
       {
         path:'payment',
@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
         path: "comments/:id",
         element: <PrivateRoute><Comments></Comments></PrivateRoute>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/posts/${params.id}`),
+          fetch(`https://y-gray-iota.vercel.app/posts/${params.id}`),
       },
       // Admin Routes
       {

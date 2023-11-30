@@ -18,7 +18,7 @@ const PostCard = ({ post }) => {
     downVote,
   } = post;
   const [searchedComments] = useSearchedComments(_id);
-  // console.log(searchedComments);
+  console.log(searchedComments);
  
   
   return (
