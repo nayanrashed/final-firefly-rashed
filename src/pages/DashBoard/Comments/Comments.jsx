@@ -12,9 +12,9 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+  { value: "irrelevant", label: "Irrelevant" },
+  { value: "offensive", label: "Offensive" },
+  { value: "violent", label: "Violent" },
 ];
 
 const Comments = () => {
@@ -38,16 +38,16 @@ const Comments = () => {
     description,
   } = useLoaderData();
   const [searchedComments] = useSearchedComments(_id);
-//   console.log(searchedComments);
+  //   console.log(searchedComments);
 
   const handleReport = async (id) => {
     const report = selectedOption.value;
     const reportData = { report };
     const commentRes = await axiosSecure.patch(`/comments/${id}`, reportData);
-    console.log('comment ID',id);
+    console.log("comment ID", id);
     console.log(commentRes.data);
 
-    if (commentRes.data.modifiedCount>0) {
+    if (commentRes.data.modifiedCount > 0) {
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -55,18 +55,28 @@ const Comments = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      setSelectedOption(null)
+      setSelectedOption(null);
     }
   };
+  const [state, setState] = useState(false);
+  // console.log(state);
 
   return (
     <div>
       <div>
-        <h2 className="text-3xl">This is Comment Page:{title}</h2>
+        <h2 className="text-3xl text-center">{title}</h2>
+        <h2 className="text-xl text-center my-4">All Comments</h2>
       </div>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
-          {/* head */}
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Comments</th>
+              <th>Feedback</th>
+              <th>Action</th>
+            </tr>
+          </thead>
 
           <tbody>
             {/* row 1 */}
@@ -77,12 +87,29 @@ const Comments = () => {
                   <div>
                     <p className="flex items-center gap-2">
                       <FaUser></FaUser>
-                      {comment.commentsBy}
+                      <span className="font-semibold">
+                        {" "}
+                        {comment.commentsBy}
+                      </span>
                     </p>
-                    <p className="flex items-center gap-2">
+                    <div className="flex items-center gap-2">
                       <FaComment></FaComment>
-                      {comment.comments}
-                    </p>
+                      {state ? (
+                        <p> {comment.comments}</p>
+                      ) : (
+                        <p>{comment.comments.slice(0, 20)}</p>
+                      )}
+                      <p
+                        className="btn btn-ghost btn-xs font-semibold"
+                        onClick={() => setState(!state)}
+                      >
+                        {state ? (
+                          <span>Read Less</span>
+                        ) : (
+                          <span>Read More</span>
+                        )}
+                      </p>
+                    </div>
                   </div>
                 </td>
                 <td>

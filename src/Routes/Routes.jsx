@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'payment',
-        element:<Payment></Payment>
+        element:<PrivateRoute><Payment></Payment></PrivateRoute>
       }
     ],
   },
@@ -63,19 +63,19 @@ export const router = createBrowserRouter([
       // User Routes
       {
         path: "myProfile",
-        element: <MyProfile></MyProfile>,
+        element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>,
       },
       {
         path: "addPost",
-        element: <AddPost></AddPost>,
+        element: <PrivateRoute><AddPost></AddPost></PrivateRoute>,
       },
       {
         path: "myPosts",
-        element: <MyPosts></MyPosts>,
+        element: <PrivateRoute><MyPosts></MyPosts></PrivateRoute>,
       },
       {
         path: "comments/:id",
-        element: <Comments></Comments>,
+        element: <PrivateRoute><Comments></Comments></PrivateRoute>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/posts/${params.id}`),
       },

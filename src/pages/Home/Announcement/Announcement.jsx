@@ -16,13 +16,13 @@ const Announcement = () => {
           {announcements.map((item) => (
             <div key={item._id}>
               <div className="flex justify-start mb-2 border-b-2 pb-4">
-                <img className="w-12 h-12 rounded-full mr-4 " src={item.authorPhoto} alt="" />
+                <img className="w-12 h-12 rounded-full mr-4 " src={item?.authorPhoto} alt="" />
                 <div className="border-l-2 pl-3">
                     <p>
-                    {item.description} 
+                    {item?.description} 
                     </p>
                     <p className="font-semibold">
-                    {item.authorName}  
+                    {item?.authorName}  
                     </p>
                 </div>
               </div>

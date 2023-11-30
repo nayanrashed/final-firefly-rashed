@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import { FaComments, FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useSearchedComments from "../../../hooks/useSearchedComments";
 // eslint-disable-next-line react/prop-types
 const PostCard = ({ post }) => {
+  
   const {
     _id,
     title,
@@ -15,10 +17,14 @@ const PostCard = ({ post }) => {
     upVote,
     downVote,
   } = post;
+  const [searchedComments] = useSearchedComments(_id);
+  console.log(searchedComments);
+ 
+  
   return (
     <>
       <Link to={`/posts/${_id}`}>
-        <div className="md:flex w-full md:h-40 border">
+        <div className="md:flex w-full md:h-44 my-3">
           <div className="w-1/3">
             <img className="w-full h-full" src={image} alt="image" />
           </div>
@@ -33,7 +39,7 @@ const PostCard = ({ post }) => {
               <p className="font-semibold">{authorName}</p>
             </div>
             <div className="flex space-x-4 justify-evenly">
-              <p className="flex items-center gap-2">Comments <FaComments/></p>{" "}
+              <p className="flex items-center gap-2">Comments <FaComments/></p>
               <div className="flex">
                 <button className="btn btn-sm btn-ghost flex items-center">
                   <FaRegThumbsUp />
@@ -50,7 +56,7 @@ const PostCard = ({ post }) => {
                 {readingTime}
                 <span> minute read</span>
               </p>
-              <p className="btn btn-sm btn-ghost">{tags}</p>
+              <p className="btn btn-sm btn-ghost uppercase">{tags}</p>
             </div>
           </div>
         </div>

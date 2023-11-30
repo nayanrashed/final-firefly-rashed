@@ -2,12 +2,13 @@ import avatar from "../../../assets/avatar.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import useAdmin from "../../../hooks/useAdmin";
 // import useAdmin from "../../../hooks/useAdmin";
 
 const MenuDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useAuth();
-  // const [isAdmin] = useAdmin();
+  const [isAdmin] = useAdmin();
   const handleLogout = () => {
     logOut()
       .then(() => {})
@@ -50,7 +51,7 @@ const MenuDropdown = () => {
             <div className="px-4 py-3 text-center hover:bg-neutral-100 transition font-semibold">
               {user?.displayName && <p>{user?.displayName}</p>}
             </div>
-            {/* {user && isAdmin && (
+            {user && isAdmin && (
               <Link
                 to="/dashboard/adminHome"
                 className="px-4 py-3 text-center hover:bg-neutral-100 transition font-semibold"
@@ -65,14 +66,14 @@ const MenuDropdown = () => {
               >
                 Dashboard
               </Link>
-            )} */}
+            )}
 
-            <Link
+            {/* <Link
               to="/dashboard/myProfile"
               className="px-4 py-3 text-center hover:bg-neutral-100 transition font-semibold"
             >
               Dashboard
-            </Link>
+            </Link> */}
 
             {user ? (
               <>

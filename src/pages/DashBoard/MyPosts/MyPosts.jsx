@@ -63,7 +63,7 @@ const MyPosts = () => {
                   </button>{" "}
                   <button className="btn btn-sm">
                     <FaThumbsDown></FaThumbsDown>
-                    {post.upVote}
+                    {post.downVote}
                   </button>
                 </td>
                 <td>

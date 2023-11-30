@@ -40,12 +40,12 @@ const Home = () => {
   useEffect(() => {
     fetch(`http://localhost:5000/posts?page=${currentPage}&size=${itemPerPage}`)
       .then((res) => res.json())
-      .then((data) => setDisplayPosts(data));
+      .then((data) => setDisplayPosts(data.reverse()));
   }, [currentPage, itemPerPage]);
 
   const handleSearch = (e, value) => {
     e.preventDefault();
-    setSearchData(value);
+    setSearchData(value.toLowerCase());
   };
 
   const handleTags = (tagName) => {
@@ -72,27 +72,28 @@ const Home = () => {
     <>
       <Banner handleSearch={handleSearch}></Banner>
       <Announcement></Announcement>
-      <div className="flex w-full border-2 border-red-600 ">
-        <div className=" w-1/3 border border-green-600">
-          <div className="grid md:grid-cols-2 px-8">
+      <div className="flex w-full  ">
+        <div className=" w-1/3 ">
+          <div className="grid md:grid-cols-2 px-8 py-6">
             {tags.map((tag) => (
               <button
                 key={tag._id}
                 onClick={() => handleTags(tag.name)}
-                className="btn btn-md btn-ghost"
+                className="btn btn-md btn-ghost bg-slate-100 m-2 rounded-full"
               >
                 {tag.name}
               </button>
             ))}
           </div>
         </div>
-        <div className=" w-2/3 border border-green-600">
+        <div className=" w-2/3">
           {/* Posts: {displayPosts?.length} */}
           <div className="">
             {displayPosts?.map((post) => (
               <PostCard key={post._id} post={post}></PostCard>
             ))}
           </div>
+          {/* Pagination */}
           <div className="text-center mb-8">
             <p className="my-2 btn btn-sm">Current Page: {currentPage}</p>
             <button className="btn btn-sm mx-2" onClick={handlePreviousPage}>Prev</button>

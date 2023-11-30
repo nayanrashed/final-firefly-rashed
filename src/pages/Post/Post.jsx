@@ -9,12 +9,14 @@ import {
   FaRegThumbsDown,
   FaRegThumbsUp,
   FaShare,
+  FaUser,
 } from "react-icons/fa";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
+import useSearchedComments from "../../hooks/useSearchedComments";
 
 const Post = () => {
   const { user } = useAuth();
@@ -36,6 +38,7 @@ const Post = () => {
     downVoteBy,
     description,
   } = useLoaderData();
+  const [searchedComments,refetch] = useSearchedComments(_id);
   const [upVoteCount, setUpVoteCount] = useState(upVote);
   const [downVoteCount, setDownVoteCount] = useState(downVote);
 
@@ -217,6 +220,7 @@ const Post = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      refetch();
     }
   };
 
@@ -245,7 +249,7 @@ const Post = () => {
         </div>
         <div className="flex">
           <p className="flex items-center gap-2 border-r-2 pr-2">
-            Comments <FaComments />
+            Comments <FaComments /> {searchedComments.length}
           </p>
           <p className="btn btn-sm btn-ghost uppercase">{tags}</p>
         </div>
@@ -301,7 +305,7 @@ const Post = () => {
               </p>
               <div className="modal-action">
                 <div method="dialog w-full">
-                  {/* if there is a button in form, it will close the modal */}
+                  
                   <button className="btn">Submit</button>
                 </div>
               </div>
@@ -322,6 +326,20 @@ const Post = () => {
             </FacebookShareButton>
           </div>
         </div>
+      </div>
+      <div className="w-full">
+        <p className="text-xl font-semibold my-2">Comments</p>
+        {searchedComments.map((comment) => (
+          <div className="flex my-4 w-3/4 mx-auto" key={comment._id}>
+            <div className="bg-amber-500 w-12 h-12 rounded-full flex justify-center items-center mr-2">
+              <FaUser className="text-xl"></FaUser>
+            </div>
+            <div className=" bg-slate-100 w-full pl-4 rounded-lg">
+              <p className="font-semibold ">{comment.commentsBy}</p>
+              <p className="flex items-center gap-2">{comment.comments}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
